@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
-  --color-accent: #06b6d4;
-  --color-accent-light: #22d3ee;
-  --color-dark-bg: #0a0a1a;
-  --color-dark-surface: #111128;
-  --color-dark-card: #1a1a3e;
-  --color-dark-border: #2a2a5a;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
+  --color-primary: #dc2626;
+  --color-primary-light: #ef4444;
+  --color-primary-dark: #b91c1c;
+  --color-accent: #f87171;
+  --color-accent-light: #fca5a5;
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #141414;
+  --color-dark-card: #1a1a1a;
+  --color-dark-border: #2a2a2a;
+  --color-text-primary: #fdf6e3;
+  --color-text-secondary: #d4c9a8;
+  --color-text-muted: #a89f8a;
+  --color-cream: #fdf6e3;
+  --color-cream-dark: #f5e6c8;
   --font-inter: 'Inter', sans-serif;
   --font-space: 'Space Grotesk', sans-serif;
 }
@@ -60,15 +62,15 @@ body {
 }
 
 .glass-card {
-  background: rgba(17, 17, 40, 0.7);
+  background: rgba(20, 20, 20, 0.8);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.1);
 }
 
 .glow {
-  box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
 }
 
 .text-glow {
-  text-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
+  text-shadow: 0 0 40px rgba(220, 38, 38, 0.5);
 }

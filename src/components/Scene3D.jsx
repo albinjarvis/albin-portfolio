@@ -17,7 +17,7 @@ const AnimatedSphere = () => {
     <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
       <Sphere ref={meshRef} args={[1.5, 100, 100]} scale={1.8}>
         <MeshDistortMaterial
-          color="#6366f1"
+          color="#dc2626"
           attach="material"
           distort={0.4}
           speed={2}
@@ -60,7 +60,7 @@ const ParticleField = () => {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.02} color="#6366f1" transparent opacity={0.6} sizeAttenuation />
+      <pointsMaterial size={0.02} color="#dc2626" transparent opacity={0.6} sizeAttenuation />
     </points>
   )
 }
@@ -80,7 +80,7 @@ const TorusKnot = () => {
       <mesh ref={meshRef} position={[3, -1, -2]} scale={0.5}>
         <torusKnotGeometry args={[1, 0.3, 128, 16]} />
         <meshStandardMaterial
-          color="#06b6d4"
+          color="#f87171"
           wireframe
           transparent
           opacity={0.3}
@@ -99,8 +99,8 @@ const Scene3D = () => {
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <pointLight position={[-10, -10, -5]} color="#6366f1" intensity={0.5} />
-        <pointLight position={[10, -10, 5]} color="#06b6d4" intensity={0.3} />
+        <pointLight position={[-10, -10, -5]} color="#dc2626" intensity={0.5} />
+        <pointLight position={[10, -10, 5]} color="#f87171" intensity={0.3} />
         <AnimatedSphere />
         <ParticleField />
         <TorusKnot />
