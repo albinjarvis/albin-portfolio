@@ -61,38 +61,38 @@ const ProjectCard = ({ project, index }) => {
       transition={{ duration: 0.7, delay: index * 0.12 }}
       className="group"
     >
-      <div className={`relative p-10 rounded-3xl border border-cream/5 bg-dark-card/30 backdrop-blur-sm ${project.accentColor} transition-all duration-500 hover:bg-dark-card/60 overflow-hidden`}>
+      <div className={`relative p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl border border-cream/5 bg-dark-card/30 backdrop-blur-sm ${project.accentColor} transition-all duration-500 hover:bg-dark-card/60 overflow-hidden`}>
         {/* Background gradient blob */}
-        <div className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-bl ${project.gradient} rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -translate-y-1/2 translate-x-1/4`} />
+        <div className={`absolute top-0 right-0 w-48 sm:w-64 h-48 sm:h-64 bg-gradient-to-bl ${project.gradient} rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 -translate-y-1/2 translate-x-1/4`} />
         
         {/* Project number */}
-        <span className="absolute top-8 right-8 text-cream/5 text-7xl font-bold font-[family-name:var(--font-space)] group-hover:text-cream/10 transition-colors duration-500">
+        <span className="absolute top-4 right-4 sm:top-8 sm:right-8 text-cream/5 text-5xl sm:text-7xl font-bold font-[family-name:var(--font-space)] group-hover:text-cream/10 transition-colors duration-500">
           {project.number}
         </span>
 
         {/* Content */}
         <div className="relative z-10">
           {/* Icon */}
-          <span className="text-5xl block mb-8 group-hover:scale-110 transition-transform duration-500">
+          <span className="text-4xl sm:text-5xl block mb-5 sm:mb-8 group-hover:scale-110 transition-transform duration-500">
             {project.icon}
           </span>
 
           {/* Title */}
-          <h3 className="text-cream text-2xl font-bold mb-4 group-hover:text-primary-light transition-colors duration-300 font-[family-name:var(--font-space)]">
+          <h3 className="text-cream text-lg sm:text-xl md:text-2xl font-bold mb-3 sm:mb-4 group-hover:text-primary-light transition-colors duration-300 font-[family-name:var(--font-space)]">
             {project.title}
           </h3>
 
           {/* Description */}
-          <p className="text-cream/40 text-base leading-relaxed font-light mb-8 max-w-md">
+          <p className="text-cream/40 text-sm sm:text-base leading-relaxed font-light mb-5 sm:mb-8 max-w-md">
             {project.description}
           </p>
 
           {/* Tags */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-4 py-1.5 rounded-full text-xs text-cream/50 border border-cream/10 group-hover:border-primary/20 group-hover:text-cream/70 transition-all duration-300"
+                className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs text-cream/50 border border-cream/10 group-hover:border-primary/20 group-hover:text-cream/70 transition-all duration-300"
               >
                 {tag}
               </span>
@@ -111,7 +111,7 @@ const Projects = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 })
 
   return (
-    <section id="projects" className="py-40 px-6 relative">
+    <section id="projects" className="py-20 sm:py-32 md:py-40 px-4 sm:px-6 relative">
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
@@ -124,27 +124,27 @@ const Projects = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="mb-24"
+          className="mb-12 sm:mb-16 md:mb-24"
         >
-          <p className="text-primary text-sm tracking-[0.4em] uppercase mb-4 font-light">My Work</p>
-          <h2 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-space)]">
+          <p className="text-primary text-xs sm:text-sm tracking-[0.4em] uppercase mb-3 sm:mb-4 font-light">My Work</p>
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-bold font-[family-name:var(--font-space)]">
             <span className="text-cream">Featured</span>{' '}
             <span className="gradient-text">Projects</span>
           </h2>
-          <p className="text-cream/40 text-lg mt-6 max-w-xl font-light leading-relaxed">
+          <p className="text-cream/40 text-base sm:text-lg mt-4 sm:mt-6 max-w-xl font-light leading-relaxed">
             Academic projects showcasing my exploration in AI, Machine Learning, and web development.
           </p>
         </motion.div>
 
-        {/* Projects - staggered 2-column grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
           {projects.slice(0, 4).map((project, index) => (
             <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
 
         {/* Last project - full width */}
-        <div className="mt-8">
+        <div className="mt-4 sm:mt-6 md:mt-8">
           <ProjectCard project={projects[4]} index={4} />
         </div>
 
@@ -153,7 +153,7 @@ const Projects = () => {
           initial={{ scaleX: 0 }}
           animate={inView ? { scaleX: 1 } : {}}
           transition={{ duration: 1.5, delay: 0.8 }}
-          className="mt-24 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+          className="mt-16 sm:mt-24 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
         />
       </motion.div>
     </section>

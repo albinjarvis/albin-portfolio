@@ -1,20 +1,30 @@
-import React, { useRef, useMemo, useEffect, useState } from 'react'
+import React, { useMemo, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 const SparklesBackground = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) return // Skip mouse tracking on mobile
     const handleMouseMove = (e) => {
       setMousePos({ x: e.clientX, y: e.clientY })
     }
     window.addEventListener('mousemove', handleMouseMove)
     return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [])
+  }, [isMobile])
 
-  // Generate random sparkles
+  // Generate random sparkles - fewer on mobile
   const sparkles = useMemo(() => {
-    return Array.from({ length: 60 }, (_, i) => ({
+    const count = isMobile ? 25 : 60
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
@@ -22,11 +32,12 @@ const SparklesBackground = () => {
       delay: Math.random() * 5,
       duration: Math.random() * 3 + 2,
     }))
-  }, [])
+  }, [isMobile])
 
-  // Galaxy stars - tiny dots
+  // Galaxy stars - fewer on mobile for performance
   const stars = useMemo(() => {
-    return Array.from({ length: 200 }, (_, i) => ({
+    const count = isMobile ? 80 : 200
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
       top: Math.random() * 100,
@@ -34,7 +45,7 @@ const SparklesBackground = () => {
       opacity: Math.random() * 0.7 + 0.3,
       twinkleDelay: Math.random() * 4,
     }))
-  }, [])
+  }, [isMobile])
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -67,15 +78,17 @@ const SparklesBackground = () => {
         }}
       />
 
-      {/* Mouse follow glow */}
-      <div 
-        className="absolute w-[400px] h-[400px] rounded-full opacity-[0.04] blur-[80px] transition-all duration-1000 ease-out"
-        style={{
-          background: 'radial-gradient(circle, #dc2626 0%, transparent 70%)',
-          left: mousePos.x - 200,
-          top: mousePos.y - 200,
-        }}
-      />
+      {/* Mouse follow glow - desktop only */}
+      {!isMobile && (
+        <div 
+          className="absolute w-[400px] h-[400px] rounded-full opacity-[0.04] blur-[80px] transition-all duration-1000 ease-out"
+          style={{
+            background: 'radial-gradient(circle, #dc2626 0%, transparent 70%)',
+            left: mousePos.x - 200,
+            top: mousePos.y - 200,
+          }}
+        />
+      )}
 
       {/* Galaxy stars */}
       {stars.map((star) => (
