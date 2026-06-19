@@ -7,8 +7,9 @@ const education = [
     degree: 'Bachelor of Technology',
     field: 'Artificial Intelligence & Data Science',
     institution: 'Karunya Institute of Technology',
-    period: '2025 - 2029 (Expected)',
-    status: 'Currently Pursuing First Year',
+    period: '2025 - 2029',
+    status: 'Currently Pursuing',
+    icon: '🎓',
     highlights: [
       'Participated in technical workshops and seminars',
       'Engaged in university technical communities',
@@ -20,6 +21,7 @@ const education = [
     institution: 'Carmel Garden Matriculation',
     period: '2025',
     status: 'Completed',
+    icon: '📚',
     highlights: [],
   },
   {
@@ -28,6 +30,7 @@ const education = [
     institution: 'SSLC Board',
     period: '2023',
     status: '74%',
+    icon: '🏫',
     highlights: [],
   },
 ]
@@ -36,79 +39,110 @@ const Education = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
   return (
-    <section id="education" className="py-24 px-6 relative">
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl -translate-x-1/2" />
-
+    <section id="education" className="py-40 px-6 relative">
       <motion.div
         ref={ref}
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        className="max-w-4xl mx-auto"
+        transition={{ duration: 1 }}
+        className="max-w-5xl mx-auto"
       >
+        {/* Section Title */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          transition={{ duration: 0.8 }}
+          className="mb-24"
         >
-          <p className="text-primary-light text-sm tracking-[0.3em] uppercase mb-3">My Journey</p>
-          <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-space)]">
-            <span className="gradient-text">Education</span>
+          <p className="text-primary text-sm tracking-[0.4em] uppercase mb-4 font-light">My Journey</p>
+          <h2 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-space)]">
+            <span className="text-cream">Edu</span>
+            <span className="gradient-text">cation</span>
           </h2>
         </motion.div>
 
         {/* Timeline */}
         <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary via-accent to-transparent" />
+          {/* Vertical Line */}
+          <motion.div
+            initial={{ scaleY: 0 }}
+            animate={inView ? { scaleY: 1 } : {}}
+            transition={{ duration: 1.5, delay: 0.3 }}
+            className="absolute left-[27px] md:left-[31px] top-0 bottom-0 w-px origin-top"
+            style={{ background: 'linear-gradient(to bottom, #dc2626, rgba(220,38,38,0.2), transparent)' }}
+          />
 
-          {education.map((edu, index) => (
-            <motion.div
-              key={edu.degree + edu.institution}
-              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative flex items-center mb-12 ${
-                index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-              }`}
-            >
-              {/* Timeline Dot */}
-              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-primary rounded-full border-4 border-dark-bg -translate-x-1/2 z-10">
-                <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-20" />
-              </div>
+          {/* Education Items */}
+          <div className="space-y-16">
+            {education.map((edu, index) => (
+              <motion.div
+                key={edu.degree + edu.institution}
+                initial={{ opacity: 0, x: -30 }}
+                animate={inView ? { opacity: 1, x: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.4 + index * 0.2 }}
+                className="relative flex gap-10 group"
+              >
+                {/* Timeline Dot */}
+                <div className="relative flex-shrink-0">
+                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-full border border-cream/10 bg-dark-card/80 flex items-center justify-center text-2xl group-hover:border-primary/40 group-hover:bg-primary/5 transition-all duration-500">
+                    {edu.icon}
+                  </div>
+                  {/* Pulse ring on hover */}
+                  <div className="absolute inset-0 rounded-full border border-primary/0 group-hover:border-primary/20 group-hover:scale-150 transition-all duration-700 opacity-0 group-hover:opacity-100" />
+                </div>
 
-              {/* Content Card */}
-              <div className={`ml-16 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                <div className="glass-card rounded-xl p-6 hover:border-primary/30 transition-all group">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="px-3 py-1 bg-primary/10 rounded-full text-xs text-primary-light font-medium">
+                {/* Content */}
+                <div className="flex-1 pb-2">
+                  {/* Period & Status */}
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <span className="text-primary/80 text-sm font-mono tracking-wide">
                       {edu.period}
                     </span>
-                    {edu.status && (
-                      <span className="px-3 py-1 bg-accent/10 rounded-full text-xs text-accent-light font-medium">
-                        {edu.status}
-                      </span>
-                    )}
+                    <span className="w-1 h-1 rounded-full bg-cream/20" />
+                    <span className="text-cream/40 text-sm">
+                      {edu.status}
+                    </span>
                   </div>
-                  <h3 className="text-xl font-bold text-text-primary group-hover:text-primary-light transition-colors">
+
+                  {/* Degree */}
+                  <h3 className="text-cream text-2xl md:text-3xl font-bold mb-2 group-hover:text-primary-light transition-colors duration-300 font-[family-name:var(--font-space)]">
                     {edu.degree}
                   </h3>
-                  <p className="text-primary-light font-medium text-sm mt-1">{edu.field}</p>
-                  <p className="text-text-secondary text-sm mt-1">{edu.institution}</p>
+
+                  {/* Field */}
+                  <p className="text-primary-light/70 text-base font-medium mb-1">
+                    {edu.field}
+                  </p>
+
+                  {/* Institution */}
+                  <p className="text-cream/40 text-sm font-light">
+                    {edu.institution}
+                  </p>
+
+                  {/* Highlights */}
                   {edu.highlights.length > 0 && (
-                    <ul className="mt-3 space-y-1">
+                    <div className="mt-6 space-y-3">
                       {edu.highlights.map((item, i) => (
-                        <li key={i} className="text-text-muted text-sm flex items-start gap-2">
-                          <span className="text-primary mt-1">&#8226;</span>
-                          {item}
-                        </li>
+                        <div key={i} className="flex items-start gap-3">
+                          <span className="w-1.5 h-1.5 rounded-full bg-primary/50 mt-2 flex-shrink-0" />
+                          <p className="text-cream/35 text-sm font-light leading-relaxed">{item}</p>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   )}
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
+
+        {/* Bottom accent line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.5, delay: 1 }}
+          className="mt-24 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        />
       </motion.div>
     </section>
   )

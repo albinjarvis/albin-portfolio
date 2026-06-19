@@ -3,23 +3,26 @@ import { motion } from 'framer-motion'
 
 const Loader = () => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-dark-bg">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#050505]">
       <motion.div
-        className="flex flex-col items-center gap-4"
+        className="flex flex-col items-center gap-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
+        {/* Logo */}
         <motion.div
-          className="text-5xl font-bold font-[family-name:var(--font-space)]"
+          className="text-6xl font-bold font-[family-name:var(--font-space)]"
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
-          <span className="gradient-text font-[family-name:var(--font-space)]">AJ</span>
+          <span className="gradient-text">AJ</span>
         </motion.div>
+
+        {/* Loading bar */}
         <motion.div
-          className="w-48 h-1 bg-dark-card rounded-full overflow-hidden"
+          className="w-48 h-px bg-cream/5 rounded-full overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -31,13 +34,15 @@ const Loader = () => {
             transition={{ duration: 1.8, ease: "easeInOut", delay: 0.5 }}
           />
         </motion.div>
+
+        {/* Text */}
         <motion.p
-          className="text-text-secondary text-sm tracking-widest uppercase"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="text-cream/20 text-xs tracking-[0.4em] uppercase font-light"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
         >
-          Loading Experience...
+          Loading
         </motion.p>
       </motion.div>
     </div>

@@ -8,6 +8,7 @@ import Education from './components/Education'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import Loader from './components/Loader'
+import SparklesBackground from './components/SparklesBackground'
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -21,14 +22,23 @@ function App() {
 
   return (
     <div className="relative">
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Education />
-      <Contact />
-      <Footer />
+      {/* Global galaxy/sparkles background */}
+      <SparklesBackground />
+      
+      {/* Noise texture overlay for depth */}
+      <div className="noise-overlay" />
+
+      {/* Main content */}
+      <div className="relative z-10">
+        <Navbar />
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <Education />
+        <Contact />
+        <Footer />
+      </div>
     </div>
   )
 }
