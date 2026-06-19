@@ -16,7 +16,7 @@ const Loader = () => {
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <span className="gradient-text">AJ</span>
+          <span className="gradient-text font-[family-name:var(--font-space)]">AJ</span>
         </motion.div>
         <motion.div
           className="w-48 h-1 bg-dark-card rounded-full overflow-hidden"
