@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="50%" stop-color="#1a0808"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="rgba(220,38,38,0.15)"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(220,38,38,0.3)"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="500" fill="url(#bg)" rx="24"/>
+  
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03" stroke="#fdf6e3" stroke-width="0.5" fill="none">
+    <line x1="0" y1="50" x2="400" y2="50"/>
+    <line x1="0" y1="100" x2="400" y2="100"/>
+    <line x1="0" y1="150" x2="400" y2="150"/>
+    <line x1="0" y1="200" x2="400" y2="200"/>
+    <line x1="0" y1="250" x2="400" y2="250"/>
+    <line x1="0" y1="300" x2="400" y2="300"/>
+    <line x1="0" y1="350" x2="400" y2="350"/>
+    <line x1="0" y1="400" x2="400" y2="400"/>
+    <line x1="0" y1="450" x2="400" y2="450"/>
+    <line x1="50" y1="0" x2="50" y2="500"/>
+    <line x1="100" y1="0" x2="100" y2="500"/>
+    <line x1="150" y1="0" x2="150" y2="500"/>
+    <line x1="200" y1="0" x2="200" y2="500"/>
+    <line x1="250" y1="0" x2="250" y2="500"/>
+    <line x1="300" y1="0" x2="300" y2="500"/>
+    <line x1="350" y1="0" x2="350" y2="500"/>
+  </g>
+  
+  <!-- Nebula glow -->
+  <circle cx="200" cy="200" r="160" fill="url(#glow)"/>
+  
+  <!-- Decorative sparkle dots -->
+  <circle cx="80" cy="80" r="2" fill="#ef4444" opacity="0.6"/>
+  <circle cx="320" cy="120" r="1.5" fill="#fdf6e3" opacity="0.4"/>
+  <circle cx="60" cy="300" r="1" fill="#f87171" opacity="0.5"/>
+  <circle cx="340" cy="350" r="2" fill="#dc2626" opacity="0.4"/>
+  <circle cx="150" cy="60" r="1" fill="#fdf6e3" opacity="0.3"/>
+  <circle cx="300" cy="420" r="1.5" fill="#ef4444" opacity="0.5"/>
+  <circle cx="50" cy="440" r="1" fill="#fdf6e3" opacity="0.3"/>
+  <circle cx="350" cy="60" r="1.5" fill="#dc2626" opacity="0.4"/>
+  
+  <!-- Main avatar circle -->
+  <circle cx="200" cy="190" r="85" fill="none" stroke="url(#accent)" stroke-width="2" opacity="0.4"/>
+  <circle cx="200" cy="190" r="75" fill="#111111" filter="url(#shadow)"/>
+  
+  <!-- Stylized person silhouette -->
+  <g fill="#fdf6e3" opacity="0.9">
+    <!-- Head -->
+    <circle cx="200" cy="165" r="22"/>
+    <!-- Shoulders/body -->
+    <path d="M160 220 C160 195, 175 190, 200 190 C225 190, 240 195, 240 220 L240 230 C240 235, 237 238, 232 238 L168 238 C163 238, 160 235, 160 230 Z"/>
+  </g>
+  
+  <!-- Orbiting ring -->
+  <ellipse cx="200" cy="190" rx="110" ry="40" fill="none" stroke="#dc2626" stroke-width="0.8" opacity="0.2" transform="rotate(-20 200 190)"/>
+  
+  <!-- Spark/brand mark -->
+  <g transform="translate(200, 190) scale(0.4)" fill="#dc2626" opacity="0.15">
+    <path d="M0 -44c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/>
+  </g>
+  
+  <!-- Name text -->
+  <text x="200" y="320" text-anchor="middle" font-family="'Onest',sans-serif" font-size="36" font-weight="700" fill="#fdf6e3" letter-spacing="-1">Albin</text>
+  <text x="200" y="360" text-anchor="middle" font-family="'Onest',sans-serif" font-size="36" font-weight="700" fill="url(#accent)" letter-spacing="-1">Jarvis</text>
+  
+  <!-- Subtitle -->
+  <text x="200" y="400" text-anchor="middle" font-family="'Onest',sans-serif" font-size="11" font-weight="500" fill="rgba(253,246,227,0.5)" letter-spacing="3" text-transform="uppercase">AI &amp; DATA SCIENCE</text>
+  
+  <!-- Bottom accent line -->
+  <line x1="150" y1="430" x2="250" y2="430" stroke="url(#accent)" stroke-width="1" opacity="0.4"/>
+  
+  <!-- Corner accents -->
+  <path d="M20 40 L20 20 L40 20" fill="none" stroke="#dc2626" stroke-width="1.5" opacity="0.5"/>
+  <path d="M360 40 L380 40 L380 20" fill="none" stroke="#dc2626" stroke-width="1.5" opacity="0.5" transform="translate(0, -0)"/>
+  <path d="M20 460 L20 480 L40 480" fill="none" stroke="#dc2626" stroke-width="1.5" opacity="0.5"/>
+  <path d="M360 480 L380 480 L380 460" fill="none" stroke="#dc2626" stroke-width="1.5" opacity="0.5"/>
+</svg>
