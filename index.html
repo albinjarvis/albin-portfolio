@@ -80,10 +80,14 @@ header .inner{display:flex;align-items:center;justify-content:space-between;padd
 
 <style>
 /* HERO */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;border-radius:0 0 2rem 2rem;background:linear-gradient(135deg,#0a0a0a 0%,#1a0505 50%,#0a0a0a 100%)}
-.hero-canvas{position:absolute;inset:0;z-index:0}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;border-radius:0 0 2rem 2rem;background:#0a0a0a}
+.hero-photo{position:absolute;inset:0;z-index:0}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.35;filter:grayscale(30%);transition:opacity 1.5s ease}
+.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,10,10,.3) 0%,rgba(10,10,10,.1) 30%,rgba(10,10,10,.6) 70%,rgba(10,10,10,.95) 100%)}
+.hero-photo::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,transparent 30%,rgba(10,10,10,.7) 100%);z-index:1}
+.hero-canvas{position:absolute;inset:0;z-index:2}
 .hero-canvas canvas{width:100%;height:100%}
-.hero-vignette{position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(10,10,10,.7) 100%)}
+.hero-vignette{position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at center,transparent 40%,rgba(10,10,10,.7) 100%)}
 .hero-watermark{pointer-events:none;position:absolute;inset-inline:0;bottom:5rem;z-index:1;text-align:center;user-select:none;font-weight:700;line-height:1;font-size:10rem;color:rgba(220,38,38,.06);letter-spacing:-.02em}
 @media(min-width:640px){.hero-watermark{font-size:13rem}}
 .hero-content{position:relative;z-index:20;display:flex;flex-direction:column;gap:2rem;padding:8rem 0 5rem}
@@ -396,6 +400,7 @@ footer .shell{position:relative;z-index:10;padding:5rem 0 2.5rem}
 
 <!-- HERO -->
 <section class="hero" id="home">
+  <div class="hero-photo"><img src="images/profile.png" alt="Albin Jarvis A"/></div>
   <div class="hero-canvas" id="heroCanvas"></div>
   <div class="hero-vignette"></div>
   <div class="hero-watermark">ALBIN</div>
@@ -455,7 +460,7 @@ footer .shell{position:relative;z-index:10;padding:5rem 0 2.5rem}
     <div class="about-left">
       <svg class="about-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></svg>
       <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">
-        <img src="images/profile.jpg" alt="Albin Jarvis A" style="width:16rem;max-width:100%;border-radius:1.5rem;border:1px solid rgba(253,246,227,.08)"/>
+        <img src="images/profile.png" alt="Albin Jarvis A" style="width:16rem;max-width:100%;border-radius:1.5rem;border:1px solid rgba(253,246,227,.08)"/>
       </div>
       <div class="eyebrow reveal" style="position:relative;margin-top:1.5rem"><span class="dot"></span> The Student</div>
       <div class="about-distributed reveal" style="margin-top:auto;position:absolute;bottom:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9.25"/><path d="M12 2.75c2.6 2.3 4 5.8 4 9.25s-1.4 6.95-4 9.25c-2.6-2.3-4-5.8-4-9.25s1.4-6.95 4-9.25zM2.75 12h18.5"/></svg><span style="max-width:14rem">B.Tech AI & Data Science at Karunya Institute of Technology.</span></div>
