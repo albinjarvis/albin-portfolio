@@ -6,10 +6,10 @@
   --color-primary-dark: #b91c1c;
   --color-accent: #f87171;
   --color-accent-light: #fca5a5;
-  --color-dark-bg: #0a0a0a;
-  --color-dark-surface: #141414;
-  --color-dark-card: #1a1a1a;
-  --color-dark-border: #2a2a2a;
+  --color-dark-bg: #050505;
+  --color-dark-surface: #0a0a0a;
+  --color-dark-card: #111111;
+  --color-dark-border: #1a1a1a;
   --color-text-primary: #fdf6e3;
   --color-text-secondary: #d4c9a8;
   --color-text-muted: #a89f8a;
@@ -32,45 +32,149 @@ html {
 body {
   font-family: var(--font-inter);
   background-color: var(--color-dark-bg);
-  color: var(--color-text-primary);
+  color: var(--color-cream);
   overflow-x: hidden;
 }
 
+/* Custom Scrollbar - thin and minimal */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-dark-bg);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 ::selection {
-  background: var(--color-primary);
-  color: white;
+  background: rgba(220, 38, 38, 0.3);
+  color: var(--color-cream);
 }
 
+/* Gradient Text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-accent) 50%, var(--color-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* Glass Card - subtle and clean */
 .glass-card {
-  background: rgba(20, 20, 20, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(220, 38, 38, 0.1);
+  background: rgba(11, 11, 11, 0.6);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(253, 246, 227, 0.04);
 }
 
+/* Glow effects */
 .glow {
-  box-shadow: 0 0 40px rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 60px rgba(220, 38, 38, 0.12), 0 0 120px rgba(220, 38, 38, 0.05);
+}
+
+.glow-sm {
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.1);
 }
 
 .text-glow {
-  text-shadow: 0 0 40px rgba(220, 38, 38, 0.5);
+  text-shadow: 0 0 60px rgba(220, 38, 38, 0.4), 0 0 120px rgba(220, 38, 38, 0.15);
+}
+
+/* Drip animation keyframes */
+@keyframes drip {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(1deg);
+  }
+  66% {
+    transform: translateY(5px) rotate(-1deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(220, 38, 38, 0.25);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-drip {
+  animation: drip 6s linear infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.1), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+/* Section divider with galaxy drip effect */
+.section-divider {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.2), transparent);
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-primary);
+}
+
+/* Noise texture overlay for depth */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }

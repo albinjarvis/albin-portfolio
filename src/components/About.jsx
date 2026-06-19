@@ -5,114 +5,134 @@ import { useInView } from 'react-intersection-observer'
 const About = () => {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-  }
-
   return (
-    <section id="about" className="py-24 px-6 relative">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2" />
-      
+    <section id="about" className="py-40 px-6 relative">
       <motion.div
         ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 1 }}
+        className="max-w-5xl mx-auto"
       >
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-primary-light text-sm tracking-[0.3em] uppercase mb-3">Get to know me</p>
-          <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-space)]">
-            About <span className="gradient-text">Me</span>
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-24"
+        >
+          <p className="text-primary text-sm tracking-[0.4em] uppercase mb-4 font-light">Who I Am</p>
+          <h2 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-space)]">
+            <span className="text-cream">About</span>{' '}
+            <span className="gradient-text">Me</span>
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Image */}
-          <motion.div variants={itemVariants} className="relative group">
-            <div className="relative w-72 h-72 md:w-96 md:h-96 mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-accent rounded-2xl rotate-6 opacity-20 group-hover:rotate-12 transition-transform duration-500" />
-              <div className="absolute inset-0 glass-card rounded-2xl overflow-hidden">
+        {/* Content - Photo + Text side by side */}
+        <div className="grid md:grid-cols-5 gap-16 items-start">
+          
+          {/* Profile Photo - takes 2 cols */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="md:col-span-2"
+          >
+            <div className="relative group">
+              {/* Glow behind */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              
+              {/* Photo frame */}
+              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden border border-cream/10 group-hover:border-primary/30 transition-colors duration-500">
                 <img
                   src="/images/profile.jpg"
                   alt="Albin Jarvis A"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
                   onError={(e) => {
                     e.target.style.display = 'none'
-                    e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-dark-card"><span class="text-6xl font-bold gradient-text font-[family-name:var(--font-space)]">AJ</span></div>'
+                    e.target.parentElement.innerHTML = `
+                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-dark-card to-dark-surface">
+                        <span class="text-8xl font-bold gradient-text font-[family-name:var(--font-space)]">AJ</span>
+                      </div>
+                    `
                   }}
                 />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/60 via-transparent to-transparent" />
               </div>
+
+              {/* Decorative corner accents */}
+              <div className="absolute -top-2 -left-2 w-8 h-8 border-t-2 border-l-2 border-primary/50 rounded-tl-lg" />
+              <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b-2 border-r-2 border-primary/50 rounded-br-lg" />
             </div>
           </motion.div>
 
-          {/* Content */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            <p className="text-text-secondary text-lg leading-relaxed">
-              I'm <span className="text-primary-light font-semibold">Albin Jarvis A</span>, 
-              an enthusiastic B.Tech student in Artificial Intelligence and Data Science at 
-              Karunya Institute of Technology. I'm passionate about leveraging technology to 
-              build impactful solutions and continuously learning new things.
-            </p>
-            <p className="text-text-secondary text-lg leading-relaxed">
-              As a fresher, I'm eager to contribute to meaningful projects and grow as a 
-              developer. I love exploring the intersection of AI and real-world applications, 
-              turning ideas into working products.
-            </p>
+          {/* Text content - takes 3 cols */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="md:col-span-3 space-y-10"
+          >
+            <div className="space-y-6">
+              <p className="text-cream/80 text-lg md:text-xl leading-relaxed font-light">
+                I'm <span className="text-primary-light font-medium">Albin Jarvis A</span> — 
+                an enthusiastic first-year B.Tech student specializing in 
+                <span className="text-cream font-medium"> Artificial Intelligence & Data Science</span> at 
+                Karunya Institute of Technology.
+              </p>
+              <p className="text-cream/50 text-lg leading-relaxed font-light">
+                I believe in the power of technology to transform lives. As a fresher, I bring 
+                fresh perspectives and boundless curiosity to every project I touch. 
+                I'm constantly exploring, learning, and building.
+              </p>
+            </div>
 
-            {/* Info Grid */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="glass-card rounded-xl p-4">
-                <p className="text-text-muted text-xs uppercase tracking-wider mb-1">Location</p>
-                <p className="text-text-primary font-medium">Tamil Nadu, India</p>
+            {/* Minimal info blocks */}
+            <div className="grid grid-cols-2 gap-6 pt-6">
+              <div className="space-y-1">
+                <p className="text-cream/30 text-xs tracking-[0.2em] uppercase">Location</p>
+                <p className="text-cream/80 font-medium">Tamil Nadu, India</p>
               </div>
-              <div className="glass-card rounded-xl p-4">
-                <p className="text-text-muted text-xs uppercase tracking-wider mb-1">Email</p>
-                <p className="text-text-primary font-medium text-sm">albinjarvis1@gmail.com</p>
+              <div className="space-y-1">
+                <p className="text-cream/30 text-xs tracking-[0.2em] uppercase">Languages</p>
+                <p className="text-cream/80 font-medium">English, Tamil</p>
               </div>
-              <div className="glass-card rounded-xl p-4">
-                <p className="text-text-muted text-xs uppercase tracking-wider mb-1">Phone</p>
-                <p className="text-text-primary font-medium">+91 95664 13112</p>
+              <div className="space-y-1">
+                <p className="text-cream/30 text-xs tracking-[0.2em] uppercase">Email</p>
+                <p className="text-cream/80 font-medium text-sm">albinjarvis1@gmail.com</p>
               </div>
-              <div className="glass-card rounded-xl p-4">
-                <p className="text-text-muted text-xs uppercase tracking-wider mb-1">Languages</p>
-                <p className="text-text-primary font-medium">English, Tamil</p>
+              <div className="space-y-1">
+                <p className="text-cream/30 text-xs tracking-[0.2em] uppercase">Phone</p>
+                <p className="text-cream/80 font-medium">+91 95664 13112</p>
               </div>
             </div>
 
-            {/* Hobbies */}
-            <div className="pt-4">
-              <p className="text-text-muted text-xs uppercase tracking-wider mb-3">When I'm not coding</p>
-              <div className="flex flex-wrap gap-3">
-                <span className="px-4 py-2 glass-card rounded-full text-sm text-primary-light flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1" fill="none"/>
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 2c1.93 0 3.68.69 5.05 1.83L12 8.5 6.95 5.83A7.95 7.95 0 0112 4zm-8 8c0-1.62.49-3.13 1.33-4.38L10.5 12l-5.17 4.38A7.95 7.95 0 014 12zm8 8c-1.93 0-3.68-.69-5.05-1.83L12 15.5l5.05 2.67A7.95 7.95 0 0112 20zm1.5-8L18.67 7.62A7.95 7.95 0 0120 12c0 1.62-.49 3.13-1.33 4.38L13.5 12z"/>
-                  </svg>
+            {/* Hobbies - elegant pills */}
+            <div className="pt-8 border-t border-cream/5">
+              <p className="text-cream/30 text-xs tracking-[0.2em] uppercase mb-5">When I'm not coding</p>
+              <div className="flex flex-wrap gap-4">
+                <motion.span
+                  className="px-6 py-3 rounded-full border border-primary/20 bg-primary/5 text-primary-light text-sm font-medium flex items-center gap-3"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(220,38,38,0.5)' }}
+                >
+                  <span className="text-lg">⚽</span>
                   Football
-                </span>
-                <span className="px-4 py-2 glass-card rounded-full text-sm text-accent-light flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
-                  </svg>
+                </motion.span>
+                <motion.span
+                  className="px-6 py-3 rounded-full border border-cream/10 bg-cream/5 text-cream/70 text-sm font-medium flex items-center gap-3"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(253,246,227,0.3)' }}
+                >
+                  <span className="text-lg">🏍️</span>
                   Bike Riding
-                </span>
-                <span className="px-4 py-2 glass-card rounded-full text-sm text-text-secondary flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
-                  </svg>
+                </motion.span>
+                <motion.span
+                  className="px-6 py-3 rounded-full border border-cream/10 bg-cream/5 text-cream/70 text-sm font-medium flex items-center gap-3"
+                  whileHover={{ scale: 1.05, borderColor: 'rgba(253,246,227,0.3)' }}
+                >
+                  <span className="text-lg">🚀</span>
                   Tech Exploration
-                </span>
+                </motion.span>
               </div>
             </div>
           </motion.div>

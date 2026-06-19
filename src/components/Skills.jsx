@@ -3,102 +3,91 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 
 const skills = [
-  { name: 'Python', level: 85, category: 'Languages' },
-  { name: 'Machine Learning', level: 75, category: 'AI/ML' },
-  { name: 'Data Analysis', level: 80, category: 'AI/ML' },
-  { name: 'Team Collaboration', level: 90, category: 'Soft Skills' },
-  { name: 'Problem Solving', level: 85, category: 'Soft Skills' },
-]
-
-const techStack = [
-  { name: 'Python', icon: '🐍' },
-  { name: 'Machine Learning', icon: '🤖' },
-  { name: 'Data Analysis', icon: '📊' },
-  { name: 'Web Development', icon: '🌐' },
-  { name: 'SQL', icon: '🗃️' },
-  { name: 'TensorFlow', icon: '🧠' },
-  { name: 'Pandas', icon: '🐼' },
-  { name: 'NumPy', icon: '🔢' },
-  { name: 'Git', icon: '📁' },
-  { name: 'Problem Solving', icon: '💡' },
+  { name: 'Python', icon: '🐍', description: 'Core language for AI/ML development' },
+  { name: 'Machine Learning', icon: '🤖', description: 'Building intelligent systems' },
+  { name: 'Data Analysis', icon: '📊', description: 'Extracting insights from data' },
+  { name: 'TensorFlow', icon: '🧠', description: 'Deep learning frameworks' },
+  { name: 'Web Development', icon: '🌐', description: 'Full-stack web applications' },
+  { name: 'SQL & Databases', icon: '🗃️', description: 'Data storage & retrieval' },
+  { name: 'Pandas & NumPy', icon: '🐼', description: 'Data manipulation tools' },
+  { name: 'Git & GitHub', icon: '📁', description: 'Version control & collaboration' },
+  { name: 'Problem Solving', icon: '💡', description: 'Analytical thinking' },
+  { name: 'Team Collaboration', icon: '🤝', description: 'Working together effectively' },
 ]
 
 const Skills = () => {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 })
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-  }
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.05 })
 
   return (
-    <section id="skills" className="py-24 px-6 relative">
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-x-1/2" />
-
+    <section id="skills" className="py-40 px-6 relative">
       <motion.div
         ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="max-w-7xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 1 }}
+        className="max-w-6xl mx-auto"
       >
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-primary-light text-sm tracking-[0.3em] uppercase mb-3">What I Know</p>
-          <h2 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-space)]">
-            My <span className="gradient-text">Skills</span>
+        {/* Section Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="mb-24"
+        >
+          <p className="text-primary text-sm tracking-[0.4em] uppercase mb-4 font-light">My Toolkit</p>
+          <h2 className="text-5xl md:text-7xl font-bold font-[family-name:var(--font-space)]">
+            <span className="text-cream">Skills &</span>{' '}
+            <span className="gradient-text">Expertise</span>
           </h2>
+          <p className="text-cream/40 text-lg mt-6 max-w-xl font-light leading-relaxed">
+            Technologies and tools I work with to bring ideas to life.
+          </p>
         </motion.div>
 
-        {/* Tech Stack Grid */}
-        <motion.div variants={itemVariants} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-16">
-          {techStack.map((tech, index) => (
-            <motion.div
-              key={tech.name}
-              className="glass-card rounded-xl p-4 text-center hover:border-primary/30 transition-all cursor-default group"
-              whileHover={{ scale: 1.05, y: -5 }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: index * 0.05 }}
-            >
-              <span className="text-3xl mb-2 block group-hover:scale-110 transition-transform">{tech.icon}</span>
-              <p className="text-text-secondary text-sm font-medium">{tech.name}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Skill Bars */}
-        <motion.div variants={itemVariants} className="max-w-3xl mx-auto space-y-6">
+        {/* Skills Grid - floating cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
-              className="group"
-              initial={{ opacity: 0, x: -30 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.5 + index * 0.1 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.08 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+              className="group relative"
             >
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-text-primary font-medium">{skill.name}</span>
-                <span className="text-primary-light text-sm font-mono">{skill.level}%</span>
-              </div>
-              <div className="h-2 bg-dark-card rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-gradient-to-r from-primary to-accent rounded-full"
-                  initial={{ width: 0 }}
-                  animate={inView ? { width: `${skill.level}%` } : { width: 0 }}
-                  transition={{ duration: 1, delay: 0.7 + index * 0.1, ease: "easeOut" }}
-                />
+              {/* Hover glow */}
+              <div className="absolute -inset-px bg-gradient-to-br from-primary/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+              
+              <div className="relative p-8 rounded-2xl border border-cream/5 bg-dark-card/50 backdrop-blur-sm group-hover:border-primary/20 transition-all duration-500">
+                {/* Icon */}
+                <span className="text-4xl block mb-5 group-hover:scale-110 transition-transform duration-300">
+                  {skill.icon}
+                </span>
+                
+                {/* Name */}
+                <h3 className="text-cream font-semibold text-lg mb-2 group-hover:text-primary-light transition-colors duration-300">
+                  {skill.name}
+                </h3>
+                
+                {/* Description */}
+                <p className="text-cream/40 text-sm font-light leading-relaxed">
+                  {skill.description}
+                </p>
+
+                {/* Corner accent */}
+                <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-primary/0 group-hover:bg-primary/50 transition-all duration-500" />
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* Bottom accent line */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={inView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.5, delay: 0.8 }}
+          className="mt-24 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        />
       </motion.div>
     </section>
   )
